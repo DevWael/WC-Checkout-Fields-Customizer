@@ -19,9 +19,9 @@ $wc_fields = WC()->checkout()->get_checkout_fields();
 $a         = $b = $c = $d = $e = $f = 1; //iterators to change id in html
 ?>
 <h1>
-
+تحرير حقول صفحة انهاء الطلب
 </h1>
-<form action="<?php admin_url( 'admin-post.php' ); ?>" method="post">
+<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
 	<?php wp_nonce_field( 'customize_checkout', 'nonce' ); ?>
     <input type="hidden" name="action" value="customize_checkout">
     <table class="wp-list-table widefat fixed striped">

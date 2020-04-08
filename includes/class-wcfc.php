@@ -139,16 +139,14 @@ class Wcfc {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Wcfc_i18n();
-
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	private function options_page() {
 		$options_page = new Wcfc_Options_Page();
 		$this->loader->add_action( 'plugins_loaded', $options_page, 'add_page' );
+		$this->loader->add_action( 'admin_post_customize_checkout', $options_page, 'process_fields' );
 	}
 
 	/**

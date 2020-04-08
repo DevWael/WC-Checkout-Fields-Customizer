@@ -46,4 +46,8 @@ class Wcfc_Options_Page {
 		WC()->customer = new WC_Customer;
 	}
 
+	public function process_fields(){
+		wp_die('yes we did it');//test function
+	}
+
 }
