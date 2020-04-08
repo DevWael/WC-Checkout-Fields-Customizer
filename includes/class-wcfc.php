@@ -148,7 +148,7 @@ class Wcfc {
 
 	private function options_page() {
 		$options_page = new Wcfc_Options_Page();
-		$this->loader->add_action( 'admin_menu', $options_page, 'add_page' );
+		$this->loader->add_action( 'plugins_loaded', $options_page, 'add_page' );
 	}
 
 	/**
