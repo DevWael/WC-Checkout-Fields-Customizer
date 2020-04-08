@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       WC Checkout Fields Customizer
  * Plugin URI:        https://innoshop.co/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       customize woocommerce checkout page (remove, require or un-require) any field of checkout billing and shipping fields
  * Version:           1.0.0
  * Author:            AhmadWael
  * Author URI:        https://github.com/devwael
