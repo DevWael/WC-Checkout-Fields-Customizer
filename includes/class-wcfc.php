@@ -78,6 +78,7 @@ class Wcfc {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->options_page();
 
 	}
 
@@ -122,6 +123,8 @@ class Wcfc {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wcfc-public.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wcfc-options-page.php';
+
 		$this->loader = new Wcfc_Loader();
 
 	}
@@ -141,6 +144,11 @@ class Wcfc {
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
+	}
+
+	private function options_page() {
+		$options_page = new Wcfc_Options_Page();
+		$this->loader->add_action( 'admin_menu', $options_page, 'add_page' );
 	}
 
 	/**
