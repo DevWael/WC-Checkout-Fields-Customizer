@@ -26,6 +26,12 @@ $not_required_billing_fields  = isset( $saved_fields['not_required_billing_field
 $not_required_shipping_fields = isset( $saved_fields['not_required_shipping_fields'] ) ? $saved_fields['not_required_shipping_fields'] : array();
 $hidden_billing_fields        = isset( $saved_fields['hidden_billing_fields'] ) ? $saved_fields['hidden_billing_fields'] : array();
 $hidden_shipping_fields       = isset( $saved_fields['hidden_shipping_fields'] ) ? $saved_fields['hidden_shipping_fields'] : array();
+$skipped_billing_fields  = array(
+	'billing_country'
+);
+$skipped_shipping_fields = array(
+	'shipping_country'
+);
 ?>
 <h1>
     تحرير حقول صفحة انهاء الطلب
@@ -46,7 +52,11 @@ $hidden_shipping_fields       = isset( $saved_fields['hidden_shipping_fields'] )
                 حقول إجبارية
             </td>
             <td>
-				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) { ?>
+				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) {
+					if ( in_array( $field_key, $skipped_billing_fields, true ) ) {
+						continue;
+					}
+					?>
                     <div>
                         <input type="checkbox" name="required_billing_fields[]"
                                id="required_billing_fields-<?php echo $a ?>"
@@ -61,7 +71,11 @@ $hidden_shipping_fields       = isset( $saved_fields['hidden_shipping_fields'] )
 				} ?>
             </td>
             <td>
-				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) { ?>
+				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) {
+					if ( in_array( $field_key, $skipped_shipping_fields, true ) ) {
+						continue;
+					}
+					?>
                     <div>
                         <input type="checkbox" name="required_shipping_fields[]"
                                id="required_shipping_fields-<?php echo $b ?>"
@@ -82,7 +96,11 @@ $hidden_shipping_fields       = isset( $saved_fields['hidden_shipping_fields'] )
                 حقول إختيارية
             </td>
             <td>
-				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) { ?>
+				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) {
+					if ( in_array( $field_key, $skipped_billing_fields, true ) ) {
+						continue;
+					}
+					?>
                     <div>
                         <input type="checkbox" name="not_required_billing_fields[]"
                                id="not_required_billing_fields-<?php echo $c ?>"
@@ -97,7 +115,11 @@ $hidden_shipping_fields       = isset( $saved_fields['hidden_shipping_fields'] )
 				} ?>
             </td>
             <td>
-				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) { ?>
+				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) {
+					if ( in_array( $field_key, $skipped_shipping_fields, true ) ) {
+						continue;
+					}
+					?>
                     <div>
                         <input type="checkbox" name="not_required_shipping_fields[]"
                                id="not_required_shipping_fields-<?php echo $d ?>"
@@ -118,7 +140,11 @@ $hidden_shipping_fields       = isset( $saved_fields['hidden_shipping_fields'] )
                 إخفاء الحقول
             </td>
             <td>
-				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) { ?>
+				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) {
+					if ( in_array( $field_key, $skipped_billing_fields, true ) ) {
+						continue;
+					}
+					?>
                     <div>
                         <input type="checkbox" name="hidden_billing_fields[]"
                                id="hidden_billing_fields-<?php echo $e ?>"
@@ -133,7 +159,11 @@ $hidden_shipping_fields       = isset( $saved_fields['hidden_shipping_fields'] )
 				} ?>
             </td>
             <td>
-				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) { ?>
+				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) {
+					if ( in_array( $field_key, $skipped_shipping_fields, true ) ) {
+						continue;
+					}
+					?>
                     <div>
                         <input type="checkbox" name="hidden_shipping_fields[]"
                                id="hidden_shipping_fields-<?php echo $f ?>"
