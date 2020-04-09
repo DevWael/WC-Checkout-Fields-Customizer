@@ -82,9 +82,10 @@ class Wcfc_Fields_Modifier {
 			return $fields_array;
 		}
 
-		$required_fields = $this->required_fields( $fields_array );
-		$optional_fields = $this->optional_fields( $required_fields );
-		return $this->hidden_fields( $optional_fields );
+		$required_fields = $this->required_fields( $fields_array ); //make selected fields required
+		$optional_fields = $this->optional_fields( $required_fields ); //make selected fields optional
+
+		return $this->hidden_fields( $optional_fields ); //hide selected fields and output other fields
 	}
 
 }

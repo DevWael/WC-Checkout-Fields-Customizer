@@ -188,7 +188,7 @@ $skipped_shipping_fields = array(
         </tfoot>
     </table>
     <br>
-    <button class="button button-primary" type="submit">Save</button>
+    <button class="button button-primary" type="submit">حفظ</button>
 </form>
 
 
