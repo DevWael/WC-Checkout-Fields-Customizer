@@ -1,5 +1,7 @@
 <?php
-
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 class Wcfc_db {
 	public static function add( $option, $value = '', $deprecated = '', $autoload = 'yes' ) {
 		add_option( 'wcfc_' . $option, $value, $deprecated, $autoload );
