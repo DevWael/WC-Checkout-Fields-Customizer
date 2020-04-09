@@ -105,7 +105,7 @@ class Wcfc {
 		 * core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wcfc-loader.php';
-
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wcfc-db-options.php';
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
@@ -124,6 +124,7 @@ class Wcfc {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wcfc-public.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wcfc-options-page.php';
+
 
 		$this->loader = new Wcfc_Loader();
 
