@@ -15,11 +15,18 @@
 /**
  * all checkout fields (including custom ones)
  */
-$wc_fields = WC()->checkout()->get_checkout_fields();
-$a         = $b = $c = $d = $e = $f = 1; //iterators to change id in html
+$wc_fields                    = WC()->checkout()->get_checkout_fields();
+$a                            = $b = $c = $d = $e = $f = 1; //iterators to change id in html
+$saved_fields                 = Wcfc_db::get( 'fields' );
+$required_billing_fields      = isset( $saved_fields['required_billing_fields'] ) ? $saved_fields['required_billing_fields'] : array();
+$required_shipping_fields     = isset( $saved_fields['required_shipping_fields'] ) ? $saved_fields['required_shipping_fields'] : array();
+$not_required_billing_fields  = isset( $saved_fields['not_required_billing_fields'] ) ? $saved_fields['not_required_billing_fields'] : array();
+$not_required_shipping_fields = isset( $saved_fields['not_required_shipping_fields'] ) ? $saved_fields['not_required_shipping_fields'] : array();
+$hidden_billing_fields        = isset( $saved_fields['hidden_billing_fields'] ) ? $saved_fields['hidden_billing_fields'] : array();
+$hidden_shipping_fields       = isset( $saved_fields['hidden_shipping_fields'] ) ? $saved_fields['hidden_shipping_fields'] : array();
 ?>
 <h1>
-تحرير حقول صفحة انهاء الطلب
+    تحرير حقول صفحة انهاء الطلب
 </h1>
 <form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
 	<?php wp_nonce_field( 'customize_checkout', 'nonce' ); ?>
@@ -40,7 +47,10 @@ $a         = $b = $c = $d = $e = $f = 1; //iterators to change id in html
 				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) { ?>
                     <div>
                         <input type="checkbox" name="required_billing_fields[]"
-                               id="required_billing_fields-<?php echo $a ?>">
+                               id="required_billing_fields-<?php echo $a ?>"
+                               value="<?php echo $field_key ?>"<?php if ( in_array( $field_key, $required_billing_fields ) ) {
+							echo ' checked';
+						} ?>>
                         <label for="required_billing_fields-<?php echo $a ?>">
 							<?php echo $field_val['label'] ?>
                         </label>
@@ -52,7 +62,10 @@ $a         = $b = $c = $d = $e = $f = 1; //iterators to change id in html
 				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) { ?>
                     <div>
                         <input type="checkbox" name="required_shipping_fields[]"
-                               id="required_shipping_fields-<?php echo $b ?>">
+                               id="required_shipping_fields-<?php echo $b ?>"
+                               value="<?php echo $field_key ?>"<?php if ( in_array( $field_key, $required_shipping_fields ) ) {
+							echo ' checked';
+						} ?>>
                         <label for="required_shipping_fields-<?php echo $b ?>">
 							<?php echo $field_val['label'] ?>
                         </label>
@@ -70,7 +83,10 @@ $a         = $b = $c = $d = $e = $f = 1; //iterators to change id in html
 				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) { ?>
                     <div>
                         <input type="checkbox" name="not_required_billing_fields[]"
-                               id="not_required_billing_fields-<?php echo $c ?>">
+                               id="not_required_billing_fields-<?php echo $c ?>"
+                               value="<?php echo $field_key ?>"<?php if ( in_array( $field_key, $not_required_billing_fields ) ) {
+							echo ' checked';
+						} ?>>
                         <label for="not_required_billing_fields-<?php echo $c ?>">
 							<?php echo $field_val['label'] ?>
                         </label>
@@ -82,7 +98,10 @@ $a         = $b = $c = $d = $e = $f = 1; //iterators to change id in html
 				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) { ?>
                     <div>
                         <input type="checkbox" name="not_required_shipping_fields[]"
-                               id="not_required_shipping_fields-<?php echo $d ?>">
+                               id="not_required_shipping_fields-<?php echo $d ?>"
+                               value="<?php echo $field_key ?>"<?php if ( in_array( $field_key, $not_required_shipping_fields ) ) {
+							echo ' checked';
+						} ?>>
                         <label for="not_required_shipping_fields-<?php echo $d ?>">
 							<?php echo $field_val['label'] ?>
                         </label>
@@ -100,7 +119,10 @@ $a         = $b = $c = $d = $e = $f = 1; //iterators to change id in html
 				<?php foreach ( $wc_fields['billing'] as $field_key => $field_val ) { ?>
                     <div>
                         <input type="checkbox" name="hidden_billing_fields[]"
-                               id="hidden_billing_fields-<?php echo $e ?>">
+                               id="hidden_billing_fields-<?php echo $e ?>"
+                               value="<?php echo $field_key ?>"<?php if ( in_array( $field_key, $hidden_billing_fields ) ) {
+							echo ' checked';
+						} ?>>
                         <label for="hidden_billing_fields-<?php echo $e ?>">
 							<?php echo $field_val['label'] ?>
                         </label>
@@ -112,7 +134,10 @@ $a         = $b = $c = $d = $e = $f = 1; //iterators to change id in html
 				<?php foreach ( $wc_fields['shipping'] as $field_key => $field_val ) { ?>
                     <div>
                         <input type="checkbox" name="hidden_shipping_fields[]"
-                               id="hidden_shipping_fields-<?php echo $f ?>">
+                               id="hidden_shipping_fields-<?php echo $f ?>"
+                               value="<?php echo $field_key ?>"<?php if ( in_array( $field_key, $hidden_shipping_fields ) ) {
+							echo ' checked';
+						} ?>>
                         <label for="hidden_shipping_fields-<?php echo $f ?>">
 							<?php echo $field_val['label'] ?>
                         </label>

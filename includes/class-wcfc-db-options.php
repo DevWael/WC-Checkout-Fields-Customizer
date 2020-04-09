@@ -9,6 +9,10 @@ class Wcfc_db {
 		update_option( 'wcfc_' . $option, $value, $autoload = null );
 	}
 
+	public static function get( $option, $default = false ) {
+		return get_option( 'wcfc_' . $option, $default = false );
+	}
+
 	public static function delete( $option ) {
 		delete_option( 'wcfc_' . $option );
 	}

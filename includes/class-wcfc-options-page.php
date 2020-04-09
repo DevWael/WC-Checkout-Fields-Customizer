@@ -46,8 +46,70 @@ class Wcfc_Options_Page {
 		WC()->customer = new WC_Customer;
 	}
 
-	public function process_fields(){
-		wp_die('yes we did it');//test function
-	}
+	public function process_fields() {
+		if ( ! isset( $_POST['nonce'] ) or empty( $_POST['nonce'] ) ) {
+			wp_die( 'Not Allowed' );
+		}
 
+		if ( ! wp_verify_nonce( $_POST['nonce'], 'customize_checkout' ) ) {
+			wp_die( 'Cheating' );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Not Allowed' );
+		}
+
+		$required_billing_fields = array();
+		if ( isset( $_POST['required_billing_fields'] ) && is_array( $_POST['required_billing_fields'] ) ) {
+			foreach ( $_POST['required_billing_fields'] as $field ) {
+				$required_billing_fields[] = sanitize_text_field( $field );
+			}
+		}
+
+		$required_shipping_fields = array();
+		if ( isset( $_POST['required_shipping_fields'] ) && is_array( $_POST['required_shipping_fields'] ) ) {
+			foreach ( $_POST['required_shipping_fields'] as $field ) {
+				$required_shipping_fields[] = sanitize_text_field( $field );
+			}
+		}
+		$not_required_billing_fields = array();
+		if ( isset( $_POST['not_required_billing_fields'] ) && is_array( $_POST['not_required_billing_fields'] ) ) {
+			foreach ( $_POST['not_required_billing_fields'] as $field ) {
+				$not_required_billing_fields[] = sanitize_text_field( $field );
+			}
+		}
+		$not_required_shipping_fields = array();
+		if ( isset( $_POST['not_required_shipping_fields'] ) && is_array( $_POST['not_required_shipping_fields'] ) ) {
+			foreach ( $_POST['not_required_shipping_fields'] as $field ) {
+				$not_required_shipping_fields[] = sanitize_text_field( $field );
+			}
+		}
+		$hidden_billing_fields = array();
+		if ( isset( $_POST['hidden_billing_fields'] ) && is_array( $_POST['hidden_billing_fields'] ) ) {
+			foreach ( $_POST['hidden_billing_fields'] as $field ) {
+				$hidden_billing_fields[] = sanitize_text_field( $field );
+			}
+		}
+		$hidden_shipping_fields = array();
+		if ( isset( $_POST['hidden_shipping_fields'] ) && is_array( $_POST['hidden_shipping_fields'] ) ) {
+			foreach ( $_POST['hidden_shipping_fields'] as $field ) {
+				$hidden_shipping_fields[] = sanitize_text_field( $field );
+			}
+		}
+
+
+		$data = array(
+			'required_billing_fields'      => $required_billing_fields,
+			'required_shipping_fields'     => $required_shipping_fields,
+			'not_required_billing_fields'  => $not_required_billing_fields,
+			'not_required_shipping_fields' => $not_required_shipping_fields,
+			'hidden_billing_fields'        => $hidden_billing_fields,
+			'hidden_shipping_fields'       => $hidden_shipping_fields
+		);
+
+
+		Wcfc_db::update( 'fields', $data );//save to db
+		wp_safe_redirect( admin_url( 'admin.php?page=wcfc_options&success=true' ) );
+		exit;
+	}
 }
