@@ -6,15 +6,18 @@ if ( ! defined( 'WPINC' ) ) {
 class Wcfc_Options_Page {
 
 	public function add_page() {
-		add_menu_page(
-			__( 'Fields Customizer', 'wcfc' ),
-			__( 'Fields Customizer', 'wcfc' ),
-			'manage_options',
-			'wcfc_options',
-			array( $this, 'page_content' ),
-			'',
-			6
-		);
+		if ( get_user_meta( get_current_user_id(), 'wsd_advanced_dashboard', true ) == 1 ) {
+			//todo move this condition to wsd simple dashboard plugin
+			add_menu_page(
+				__( 'Fields Customizer', 'wcfc' ),
+				__( 'Fields Customizer', 'wcfc' ),
+				'manage_options',
+				'wcfc_options',
+				array( $this, 'page_content' ),
+				'',
+				6
+			);
+		}
 	}
 
 	public function page_content() {
